@@ -3,7 +3,7 @@ using MinimalJwt.Repositories;
 
 namespace MinimalJwt.Services
 {
-    public class MovieService : IMovieService
+    public class MovieService
     {
         public Movie Create(Movie movie)
         {

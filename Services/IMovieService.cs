@@ -1,4 +1,5 @@
-﻿using MinimalJwt.Models;
+﻿using MinimalJwt.Controllers;
+using MinimalJwt.Models;
 
 namespace MinimalJwt.Services
 {
@@ -13,6 +14,7 @@ namespace MinimalJwt.Services
         public Movie Update(Movie movie);
 
         public bool Delete(int id);
+        object Get(UserLogin user);
 
     }
 }
