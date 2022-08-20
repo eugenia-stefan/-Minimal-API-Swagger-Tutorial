@@ -12,8 +12,8 @@ using System.Text;
 namespace MinimalJwt.Controllers
 {
     [ApiController]
-    [Route("controller")]
-    public class MovieController : IMovieService
+    [Route("movie")]
+    public class MovieController : Controller
     {
         private readonly IMovieService service;
 
@@ -23,17 +23,20 @@ namespace MinimalJwt.Controllers
         }
 
 
-       
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        [HttpPost]
         public IResult Create(Movie movie)
         {
             var result = service.Create(movie);
             return Results.Ok(result);
         }
 
-         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Administrator" )]
+
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Standard, Administrator" )]
+        [HttpGet]
+        [Route("{id?}")]
         public IResult Get(int id)
         {
             var movie = service.Get(id);
@@ -43,8 +46,7 @@ namespace MinimalJwt.Controllers
             return Results.Ok(movie);
 
         }
-        
-
+        [HttpGet]
         public IResult List()
         {
             var movies = service.List();
@@ -54,8 +56,12 @@ namespace MinimalJwt.Controllers
 
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
-
+        /// <summary>
+        /// [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        /// </summary>
+        /// <param name="newMovie"></param>
+        /// <returns></returns>
+        [HttpPut]
         public IResult Update(Movie newMovie)
         {
             var updatedMovie = service.Update(newMovie);
@@ -65,8 +71,8 @@ namespace MinimalJwt.Controllers
             return Results.Ok(updatedMovie);
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
-
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator")]
+        [HttpDelete]
         public IResult Delete(int id, IMovieService service)
         {
             var result = service.Delete(id);

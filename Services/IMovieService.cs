@@ -3,7 +3,7 @@ using MinimalJwt.Models;
 
 namespace MinimalJwt.Services
 {
-    public interface IMovieService
+    public interface IMovieService 
     {
         public Movie Create(Movie movie);
 
@@ -14,7 +14,7 @@ namespace MinimalJwt.Services
         public Movie Update(Movie movie);
 
         public bool Delete(int id);
-        object Get(UserLogin user);
+        
 
     }
 }

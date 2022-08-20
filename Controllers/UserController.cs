@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using MinimalJwt.Models;
 using MinimalJwt.Repositories;
 using MinimalJwt.Services;
@@ -8,7 +9,9 @@ using System.Text;
 
 namespace MinimalJwt.Controllers
 {
-    public class UserController : IUserService
+    //[ApiController]
+    //[Route("controller")]
+    public class UserController
     {
         private readonly IUserService userService;
 
@@ -23,9 +26,6 @@ namespace MinimalJwt.Controllers
                 User user = UserRepository.Users.FirstOrDefault(o => o.Username.Equals
                 (userLogin.Username, StringComparison.OrdinalIgnoreCase) && o.Password.Equals(userLogin.Password));
                 return user;
-
-            
-
         }
         IResult Login(UserLogin user, WebApplicationBuilder builder)
         {

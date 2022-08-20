@@ -1,13 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using MinimalJwt.Controllers;
-using MinimalJwt.Models;
 using MinimalJwt.Services;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -56,19 +50,17 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 builder.Services.AddAuthorization();
+builder.Services.AddControllers();
 
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSingleton<IMovieService, MovieController>();
-builder.Services.AddSingleton<IUserService, UserController>();
+builder.Services.AddSingleton<IMovieService, MovieService>();
+builder.Services.AddSingleton<IUserService, UserService>();
 
 var app = builder.Build();
 
+app.MapControllers();
 app.UseSwagger();
 app.UseAuthorization();
 app.UseAuthentication();
-
-
 app.UseSwaggerUI();
 
 app.Run();
